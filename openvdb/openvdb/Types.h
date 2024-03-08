@@ -236,6 +236,18 @@ using make_index_sequence =
 
 ////////////////////////////////////////
 
+/// @brief A Traits struct that can be used to query properties of an input T.
+
+template<typename T>
+struct TreeTraits
+{
+    static const bool IsSparse = false;
+    static const bool IsAdaptive = false;
+};
+
+
+////////////////////////////////////////
+
 
 template<typename T, bool = IsSpecializationOf<T, math::Vec2>::value ||
                             IsSpecializationOf<T, math::Vec3>::value ||
