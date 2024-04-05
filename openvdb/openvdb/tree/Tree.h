@@ -2134,15 +2134,13 @@ Tree<RootNodeType>::print(std::ostream& os, int verboseLevel) const
 template<typename NodeT>
 struct TreeTraits<tree::Tree<NodeT>>
 {
-    static const bool IsSparse = true;
-    static const bool IsAdaptive = false;
+    constexpr static TreeRepresentation Representation = TreeRepresentation::Sparse;
 };
 
 template<typename NodeT>
 struct TreeTraits<const tree::Tree<NodeT>>
 {
-    static const bool IsSparse = true;
-    static const bool IsAdaptive = false;
+    constexpr static TreeRepresentation Representation = TreeRepresentation::Sparse;
 };
 
 

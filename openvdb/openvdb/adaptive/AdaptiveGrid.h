@@ -289,15 +289,13 @@ struct TreeAdapter<adaptive::AdaptiveAccessor<_TreeType> >
 template<typename ValueT>
 struct TreeTraits<adaptive::AdaptiveTree<ValueT>>
 {
-    static const bool IsSparse = false;
-    static const bool IsAdaptive = true;
+    constexpr static TreeRepresentation Representation = TreeRepresentation::Adaptive;
 };
 
 template<typename ValueT>
 struct TreeTraits<const adaptive::AdaptiveTree<ValueT>>
 {
-    static const bool IsSparse = false;
-    static const bool IsAdaptive = true;
+    constexpr static TreeRepresentation Representation = TreeRepresentation::Adaptive;
 };
 
 // Overload the TreeTraits struct to declare an AdaptiveAccessor as adaptive
@@ -305,8 +303,7 @@ struct TreeTraits<const adaptive::AdaptiveTree<ValueT>>
 template<typename TreeT>
 struct TreeTraits<adaptive::AdaptiveAccessor<TreeT>>
 {
-    static const bool IsSparse = false;
-    static const bool IsAdaptive = true;
+    constexpr static TreeRepresentation Representation = TreeRepresentation::Adaptive;
 };
 
 

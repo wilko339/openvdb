@@ -631,7 +631,7 @@ BoxSampler::getValues(ValueT (&data)[N][N][N], const TreeT& inTree, Coord ijk)
 {
     // This algorithm is only defined for sparse grids
 
-    if constexpr (TreeTraits<TreeT>::IsSparse) {
+    if constexpr (isSparseTree<TreeT>()) {
         data[0][0][0] = inTree.getValue(ijk); // i, j, k
 
         ijk[2] += 1;
@@ -750,7 +750,7 @@ inline bool
 BoxSampler::sample(const TreeT& inTree, const Vec3R& inCoord,
                    typename TreeT::ValueType& result)
 {
-    if constexpr (TreeTraits<TreeT>::IsSparse) {
+    if constexpr (isSparseTree<TreeT>()) {
         using ValueT = typename TreeT::ValueType;
 
         const Vec3i inIdx = local_util::floorVec3(inCoord);
@@ -765,7 +765,7 @@ BoxSampler::sample(const TreeT& inTree, const Vec3R& inCoord,
         result = BoxSampler::trilinearInterpolation(data, uvw);
 
         return hasActiveValues;
-    } else if constexpr (TreeTraits<TreeT>::IsAdaptive) {
+    } else if constexpr (isAdaptiveTree<TreeT>()) {
         // As an example, return the background value.
         // This is where the logic that could sample against an adaptive tree would live.
         // Extract the tree from the Tree or ValueAccessor
@@ -783,7 +783,7 @@ template<class TreeT>
 inline typename TreeT::ValueType
 BoxSampler::sample(const TreeT& inTree, const Vec3R& inCoord)
 {
-    if constexpr (TreeTraits<TreeT>::IsSparse) {
+    if constexpr (isSparseTree<TreeT>()) {
 
         using ValueT = typename TreeT::ValueType;
 
@@ -797,7 +797,7 @@ BoxSampler::sample(const TreeT& inTree, const Vec3R& inCoord)
         BoxSampler::getValues(data, inTree, Coord(inIdx));
 
         return BoxSampler::trilinearInterpolation(data, uvw);
-    } else if constexpr (TreeTraits<TreeT>::IsAdaptive) {
+    } else if constexpr (isAdaptiveTree<TreeT>()) {
         // As an example, return the background value.
         // This is where the logic that could sample against an adaptive tree would live.
         // Extract the tree from the Tree or ValueAccessor

@@ -1030,8 +1030,7 @@ private:
 template<typename TreeT, bool IsSafeT, typename MutexT, typename IndexSequenceT>
 struct TreeTraits<tree::ValueAccessorImpl<TreeT, IsSafeT, MutexT, IndexSequenceT>>
 {
-    static const bool IsSparse = true;
-    static const bool IsAdaptive = false;
+    constexpr static TreeRepresentation Representation = TreeRepresentation::Sparse;
 };
 
 
